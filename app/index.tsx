@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Text, View , StyleSheet, Button} from "react-native";
+import { View , StyleSheet, Button} from "react-native";
+import ListaProdutos from "./Componentes/Adaptadores/ListaProdutos";
 
 const produtos = [
   {id: 1, nome: "Schweppers", preco:5.5},
@@ -14,18 +15,13 @@ export default function Index() {
 
   return (
 
-    <View
-      style={estilo.container}
+    <View style={estilo.container}
     >
       
-    {produtos.map((p)=>(
-      <View key={p.id}>
-      <Text style={estilo.title}>{p.nome}</Text>
-      <Text style={estilo.text}>{p.preco}</Text>
-      </View>
-      )
-      )}
+      <ListaProdutos produtos={produtos}></ListaProdutos>
+      
       <Button title={counter.toString()} onPress={()=>{clickButton()}}></Button>
+      
     </View>
   );
 
