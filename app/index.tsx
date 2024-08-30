@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { View , StyleSheet, Button} from "react-native";
 import ListaProdutos from "./Componentes/Adaptadores/ListaProdutos";
+import axios from 'axios';
+import { useEffect } from "react";
 
 const produtos = [
   {id: 1, nome: "Schweppers", preco:5.5},
@@ -12,6 +14,18 @@ const produtos = [
 export default function Index() {
 
   let [counter,setCounter]= useState(0);
+  let [produtos,setProdutos]= useState([]);
+
+  useEffect(()=>{
+    carregaProdutos();
+  },[])
+
+  function carregaProdutos(){
+    axios.get('https://api-docker-2t8m.onrender.com/api/produtos')
+    .then((resp)=>{
+      setProdutos(resp.data);
+    })
+  }
 
   return (
 
