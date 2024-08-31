@@ -25,6 +25,12 @@ const estilo = StyleSheet.create({
       color: '#fc0377',
       fontFamily: 'chiller',
     },
+    imagem:{
+      width:100,
+      height:100,
+      objectFit:"contain",
+      resizeMode:"contain",
+    },
   });
 
   export default estilo

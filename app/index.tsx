@@ -3,13 +3,7 @@ import { View , StyleSheet, Button} from "react-native";
 import ListaProdutos from "./Componentes/Adaptadores/ListaProdutos";
 import axios from 'axios';
 import { useEffect } from "react";
-
-const produtos = [
-  {id: 1, nome: "Schweppers", preco:5.5},
-  {id: 2, nome: "Pepsi", preco:5.5},
-  {id: 3, nome: "Guaraná Cruzeiro", preco:5.5},
-  {id: 4, nome: "Guaraná Jesus", preco:5.5},
-];
+import CadastroProduto from "./Componentes/Adaptadores/CadastroProduto";
 
 export default function Index() {
 
@@ -35,6 +29,8 @@ export default function Index() {
       <ListaProdutos produtos={produtos}></ListaProdutos>
       
       <Button title={counter.toString()} onPress={()=>{clickButton()}}></Button>
+
+      <CadastroProduto/>
       
     </View>
   );
