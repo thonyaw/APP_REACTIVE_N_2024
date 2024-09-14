@@ -1,60 +1,63 @@
 import { useState } from "react";
-import { View , StyleSheet, Button} from "react-native";
+import { View, StyleSheet, Button } from "react-native";
 import ListaProdutos from "./Componentes/Adaptadores/ListaProdutos";
 import axios from 'axios';
 import { useEffect } from "react";
 import CadastroProduto from "./Componentes/Adaptadores/CadastroProduto";
+import { useRouter, useFocusEffect } from "expo-router";
 
 export default function Index() {
 
-  let [counter,setCounter]= useState(0);
-  let [produtos,setProdutos]= useState([]);
+  const router = useRouter();
 
-  useEffect(()=>{
+  useFocusEffect(() => {
     carregaProdutos();
-  },[])
+  })
+  
+  let [produtos, setProdutos] = useState([]);
 
-  function carregaProdutos(){
+  useEffect(() => {
+    carregaProdutos();
+  }, [])
+
+  function carregaProdutos() {
     axios.get('https://api-docker-2t8m.onrender.com/api/produtos')
-    .then((resp)=>{
-      setProdutos(resp.data);
-    })
+      .then((resp) => {
+        setProdutos(resp.data);
+      })
   }
 
   return (
 
     <View style={estilo.container}
     >
-      
-      <ListaProdutos produtos={produtos}></ListaProdutos>
-      
-      <Button title={counter.toString()} onPress={()=>{clickButton()}}></Button>
 
-      <CadastroProduto/>
-      
+      <ListaProdutos produtos={produtos} aoAtualizar={carregaProdutos}></ListaProdutos>
+      <Button title="Cadastrar" onPress={() => { telaCadastro() }}></Button>
+
     </View>
   );
 
-  function clickButton(){
-    setCounter(counter+1)
+  function telaCadastro() {
+    router.push('/Telas/cadastro')
   }
 
 }
 
-const estilo= StyleSheet.create({
+const estilo = StyleSheet.create({
   container: {
     flex: 1,
-        justifyContent: "center",
-        alignItems: "flex-start",
-        backgroundColor: "#0c0a0e",
-        paddingStart: 40,
+    justifyContent: "center",
+    alignItems: "flex-start",
+    backgroundColor: "#ffffff",
+    paddingStart: 40,
   },
-  text:{
-    color:"#fc0377",
+  text: {
+    color: "#fc0377",
     fontSize: 24,
     fontFamily: "chiller",
   },
-  title:{
+  title: {
     color: "#17ff70",
     fontSize: 30,
     textAlign: "left",
